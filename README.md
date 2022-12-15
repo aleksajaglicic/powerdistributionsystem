@@ -7,7 +7,7 @@ Potrebno je napraviti dizajn sistema, arhitekturu sistema, implementirati i iste
 -	Korisniku nudi UI unutar kog se može izvršiti odabir uređaja koji korisnik uključuje
 -	Potrošač ima par uređaja koji zahtevaju različitu količinu električne energije po satu
 -	Prilikom uključivanja uređaja potrošač javlja distributivnom centru kolika je trenutna potražnja energije na osnovu čega zatim prima energiju od ditributivnog centra kao i informaciju o ceni po kWh
-•	Svaki prijem el. energije potrebno je zabeležiti na konzoli i logovati sve događaje u .txt fajl
+-	Svaki prijem el. energije potrebno je zabeležiti na konzoli i logovati sve događaje u .txt fajl
 ## Distribution centar
 -	Prima zahteve potrošača za električnom energijom i na osnovu toga šalje zahtev hidroelektrani da pojača ili smanji proizvodnju
 -	Prima informacije o tome koliko električne energije trenutno proizvode solarni paneli i vetrogeneratori. Te informacije uključuje u jednačinu za računanje potrebe za  radom hidroelektrane.
