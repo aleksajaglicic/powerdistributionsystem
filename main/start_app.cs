@@ -6,7 +6,9 @@ namespace main
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            UiOptions ui = new UiOptions();
+            ui.MainUI();
+            
         }
     }
 }
