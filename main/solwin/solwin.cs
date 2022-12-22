@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConsoleTables;
 
 namespace main.solwin
 {
@@ -12,6 +13,7 @@ namespace main.solwin
         List<Instance> instances;
         public System.Random random = new System.Random();
         public DateTime timestamp = new DateTime();
+        //string file = Path.Combine(Environment.CurrentDirectory, @"main\solwin\", "SolarWindInstances.txt");
         public string file = @"C:\Users\aleksa2\source\main\solwin\SolarWindInstances.txt";
 
         public Solwin()
@@ -19,7 +21,7 @@ namespace main.solwin
             instances = new List<Instance>();
         }
 
-        public void addInstance()
+        public void addInstance(int c = 0, int cP = 0, int P = 0)
         {
             int choice;
             int choicePower;
@@ -45,7 +47,7 @@ namespace main.solwin
             choicePower = Int32.Parse(Console.ReadLine());
             Console.Clear();
 
-            if(choicePower == 1)
+            if (choicePower == 1)
             {
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.ForegroundColor = ConsoleColor.White;
@@ -55,6 +57,8 @@ namespace main.solwin
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.ForegroundColor = ConsoleColor.White;
                 power = Int32.Parse(Console.ReadLine());
+                //Unit Testing
+                //power = P;
                 Console.Clear();
             }
             else
@@ -62,7 +66,6 @@ namespace main.solwin
                 power = random.Next(0, 100);
             }
 
-            //int id = instances.Count + 1;
             StreamReader sr = null;
             string lines;
             int idR;
@@ -83,6 +86,8 @@ namespace main.solwin
                     powerR = Int32.Parse(lineParts[1]);
                     idSW = Int32.Parse(lineParts[2]);
                     timeChanged = Convert.ToDateTime(lineParts[3]);
+                    //Unit Testing
+                    //timeChanged = System.Convert.ToDateTime("22/12/2022 7:31:20 pm");
 
                     Instance instanceR = new Instance(idR, idSW, powerR, timeChanged);
                     instances.Add(instanceR);
@@ -103,21 +108,12 @@ namespace main.solwin
             int id = instances.Count;
 
             Instance instance = new Instance(id, choice, power, DateTime.Now);
-            //instances.Add(instance);
 
             StreamWriter sw = null;
             string text = "";
 
-            //for(int i = 0; i < instances.Count; i++)
-            //{
-            //    text += instances[i].ToString();
-            //    text += "\n";
-            //}
-
             text += instance.ToString();
             text += "\n";
-
-            //File.Create(file).Close();
 
             try
             {
@@ -152,7 +148,6 @@ namespace main.solwin
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
             eraseId = Int32.Parse(Console.ReadLine());
-            //System.Threading.Thread.Sleep(1000);
             Console.Clear();
 
             StreamReader sr = null;
@@ -229,17 +224,50 @@ namespace main.solwin
             }
         }
 
-        public void readInstanceList()
+        public void viewList()
         {
+            instances.Clear();
+            StreamReader sr = null;
+            string lines;
+            int id;
+            int power;
+            int idSW;
+            DateTime timeChanged;
 
+            var table = new ConsoleTable("Id:", "Power: ", "Type", "TimeStamp");
+
+            try
+            {
+                sr = new StreamReader(file);
+
+                while ((lines = sr.ReadLine()) != null)
+                {
+                    string[] lineParts = lines.Split('|');
+                    id = Int32.Parse(lineParts[0]);
+                    power = Int32.Parse(lineParts[1]);
+                    idSW = Int32.Parse(lineParts[2]);
+                    timeChanged = Convert.ToDateTime(lineParts[3]);
+
+                    Instance instance = new Instance(id, idSW, power, timeChanged);
+                    instances.Add(instance);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                if (sr != null)
+                {
+                    sr.Close();
+                }
+            }
+
+            ConsoleTable.From<Instance>(instances).Write();
         }
 
-        public void changePowerOfSingle()
-        {
-
-        }
-
-        public void changePowerOfAll()
+        public void changePower()
         {
 
         }
