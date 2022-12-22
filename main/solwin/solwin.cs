@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ConsoleTables;
+//using ConsoleTables;
 
 namespace main.solwin
 {
@@ -233,8 +233,7 @@ namespace main.solwin
             int power;
             int idSW;
             DateTime timeChanged;
-
-            var table = new ConsoleTable("Id:", "Power: ", "Type", "TimeStamp");
+            //var table = new ConsoleTable("Id:", "Power: ", "Type", "TimeStamp");
 
             try
             {
@@ -264,7 +263,12 @@ namespace main.solwin
                 }
             }
 
-            ConsoleTable.From<Instance>(instances).Write();
+           //ConsoleTable.From<Instance>(instances).Write();
+            Console.WriteLine("Id:\t\tPower:\t\tIdSW:\t\tTimeStamp:");
+            foreach(Instance instance in instances)
+            {
+                Console.WriteLine(instance);
+            }
         }
 
         public void changePower()
