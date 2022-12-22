@@ -89,56 +89,6 @@ namespace main
             }
         }
 
-        //public void ConsumerUI()
-        //{
-        //    Console.BackgroundColor = ConsoleColor.White;
-        //    Console.ForegroundColor = ConsoleColor.Black;
-
-        //    // Main Consumer UI
-        //    Console.WriteLine("Consumer UI");
-
-        //    Console.BackgroundColor = ConsoleColor.Black;
-        //    Console.ForegroundColor = ConsoleColor.White;
-
-        //    Console.WriteLine("\nPlease select one of the following:");
-        //    Console.WriteLine("\\\\\\\\ 1.Add/Erase Connection Sockets");
-        //    Console.WriteLine("\\\\\\\\ 2.View all Connected Sockets");
-        //    Console.WriteLine("\\\\\\\\ 3.Return to main menu\n");
-
-        //    Console.WriteLine("Go to option: ");
-        //    UINum = Int32.Parse(Console.ReadLine());
-            
-        //    //Selected options
-        //    if(UINum == 1)
-        //    {
-        //        Console.Clear();
-        //        AddEraseUI();
-        //    }
-        //    else if(UINum == 2)
-        //    {
-        //        Console.Clear();
-        //        ViewSockets();
-        //    }
-        //    else if(UINum == 3)
-        //    {
-        //        Console.Clear();
-        //        MainUI();
-        //    }
-        //    else
-        //    {
-        //        Console.Clear();
-        //        Console.BackgroundColor = ConsoleColor.Red;
-        //        Console.ForegroundColor = ConsoleColor.White;
-
-        //        Console.WriteLine("ERROR: ui number out of range... Try again");
-        //        ConsumerUI();
-
-        //        Console.BackgroundColor = ConsoleColor.Black;
-        //        Console.ForegroundColor = ConsoleColor.White;
-                
-        //    }
-        //}
-
         public void ConsumerUI()
         {
             Console.BackgroundColor = ConsoleColor.White;
