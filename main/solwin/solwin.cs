@@ -137,7 +137,6 @@ namespace main.solwin
             StreamWriter sw = null;
             string text = "";
             text += instance.ToString();
-            text += "\n";
 
             try
             {
