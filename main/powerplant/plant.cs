@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Projekat.powerplant
 {
-    class plant
+    public class plant
     {
 
-        private int snaga;
-        private int output;
-        private bool status;
+        private int power=1000;
+        private int output=0;
+        private bool  status=false;
 
-        public int Snaga
+        public int Power
         {
-            get { return snaga; }
-            set { snaga = value; }
+            get { return power; }
+            set { power = value; }
         }
         public int Output
         {
@@ -28,44 +29,82 @@ namespace Projekat.powerplant
             get { return status; }
             set { status = value; }
         }
-        public plant()
+        
+        
+        public plant(plant p)
         {
-            snaga=1000;
-            output=0;
-            status=false;
+            this.power = p.power;
+            this.output = p.output;
+            this.status = p.status;
         }
-        public plant(int snaga=1000, int output=0, bool status=false)
+        public plant(int power=1000, int output=0, bool status=false)
         {
-            this.snaga = snaga;
+            if (output > power)
+            {
+                throw new ArgumentException("Ne moze da proizvodi vise od svoje snage");
+            }
+            if (output > 0 && status==false)
+            {
+                throw new ArgumentException("Ne moze da proizvodi struju ako je ugasena");
+
+            }
+            this.power = power;
             this.output = output;
             this.status = status;
         }
 
         public int ukljuciElektranu(int proizvodnja, int potrosnja) //PRIMA PROIZVODNJU U SISTEMU (solarni paneli i vetrenjace) I POTROSNJU DA BI SE ZNALO KOLIKO TREBA DA GENERISE
         {
-            int potrebno = potrosnja - proizvodnja;     //KOLIKO JE POTREBNO STRUJE PROIZVESTI  
-            if (potrebno <= 0)      //PANELI I VETRENJACE SU DOVOLJNE ZA NAPAJANJE SISTEMA
+            int ret;
+            int pow_needed = potrosnja - proizvodnja;     //KOLIKO JE POTREBNO STRUJE PROIZVESTI  
+            if (pow_needed <= 0)      //PANELI I VETRENJACE SU DOVOLJNE ZA NAPAJANJE SISTEMA
             {
-                snaga = 1000;                           //KOLIKO ELEKTRANA MOZE DA PROIZVEDE KADA JE UKLJUCENA NA 100%
+                power = 1000;                           //KOLIKO ELEKTRANA MOZE DA PROIZVEDE KADA JE UKLJUCENA NA 100%
                 output = 0;                             //ELEKTRANA NE PROIZVODI NISTA
                 status = false;                         //ELEKTRANA JE ISKLJUCENA
-                return 0;                               //VRACA 0 JER JE ISKLJUCENA
+                ret=0;                               //VRACA 0 JER JE ISKLJUCENA
 
             }
             else
             {
-                output = (100 * potrebno) / snaga;      //PROIZVODNJA SE POSTAVLJA NA POTREBAN PROCENAT
+                output = (100 * pow_needed) / power;      //PROIZVODNJA SE POSTAVLJA NA POTREBAN PROCENAT
                 status = true;                          //ELEKTRANA JE UKLJUCENA
-                return 1;                               //AKO JE UKLJUCENA VRACA 1
+                ret=1;                               //AKO JE UKLJUCENA VRACA 1
             }
-            
+
+            Save(this);
+            return ret;
         }
 
         public override string ToString()
         {
-            return  snaga + "\t|\t" + output+ "\t|\t" + status;
+            return  power + "\t|\t" + output+ "\t|\t" + status;
         }
 
-       
+       public void Save(plant p)
+        {
+            StreamWriter sw = null;
+            string file = "C:\Users\kopitar\source\repos\Powerplant\main\powerplant"; //lokacija fajla u koji se cuvaju podaci
+
+            try
+            {
+                sw = File.AppendText(file);                                     //(appandText) da bi se sacuvali prethodni podaci fajla     
+
+                DateTime time = DateTime.Now;                                   //trenutno vreme (timestamp promene rezima elektrane)
+
+                string write = output.ToString() + "% " + " " + time;            //String koji se pise u fajl
+
+                sw.WriteLine(write);                                            //Upis u fajl
+                //Console.WriteLine("Upis uspesan");
+                sw.Close();
+            }
+            catch (Exception e)
+            {
+                //Console.WriteLine("Upis nije uspesan");
+                Console.WriteLine(e.StackTrace);
+            }
+        }
+
+
     }
 }
