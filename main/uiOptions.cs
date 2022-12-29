@@ -423,26 +423,6 @@ namespace main
             }
         }
 
-        public void ViewPanelGen()
-        {
-            //To be added
-            sw.viewList();
-            Console.WriteLine("Return to previous menu? (1 for yes)");
-            UINum = Int32.Parse(Console.ReadLine());
-
-            if(uiNum == 1)
-            {
-                Console.Clear();
-                SolarWindUI();
-            }
-
-        }
-
-        public void ChangeSunWind()
-        {
-            //To be added
-        }
-
         public void PowerPlantUI()
         {
             Console.BackgroundColor = ConsoleColor.White;
