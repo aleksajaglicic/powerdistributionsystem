@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using main.consumer;
+using ConsoleTables;
 
 namespace main
 {
@@ -347,8 +348,6 @@ namespace main
 
         public void AddEraseSolWinUI()
         {
-
-            //To be added
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
 
@@ -395,29 +394,33 @@ namespace main
 
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.ForegroundColor = ConsoleColor.White;
-
             }
-
         }
 
         public void ViewPanelGen()
         {
-            //To be added
             sw.viewList();
             Console.WriteLine("Return to previous menu? (1 for yes)");
             UINum = Int32.Parse(Console.ReadLine());
 
-            if(uiNum == 1)
+            if (uiNum == 1)
             {
                 Console.Clear();
                 SolarWindUI();
             }
-
         }
 
         public void ChangeSunWind()
         {
-            //To be added
+            sw.changePower();
+            Console.WriteLine("Return to previous menu? (1 for yes)");
+            UINum = Int32.Parse(Console.ReadLine());
+
+            if (uiNum == 1)
+            {
+                Console.Clear();
+                SolarWindUI();
+            }
         }
 
         public void PowerPlantUI()
