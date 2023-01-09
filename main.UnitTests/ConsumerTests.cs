@@ -53,9 +53,6 @@ namespace main.UnitTests
             Assert.AreEqual(c,consumer1);
         }
 
-
-
-
         [Test]
         public void readFromFileTest()
         {
@@ -88,6 +85,5 @@ namespace main.UnitTests
             //Assert
             Assert.AreEqual(consumer1.ToString()+"\n\r\n", File.ReadAllText(file));
         }
-
     }
 }
