@@ -31,6 +31,7 @@ namespace main
 
         public void MainUI()
         {
+            plant p = new plant();                              //powerplant pocetna instanca (iskljucena, ne proizvodi struju)
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
 
@@ -423,7 +424,7 @@ namespace main
             }
         }
 
-        public void PowerPlantUI()
+        public void PowerPlantUI(plant p)                       //prima powerplant 
         {
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
@@ -446,12 +447,12 @@ namespace main
             if (UINum == 1)
             {
                 Console.Clear();
-                PPStatusEG();
+                PPStatusEG(p);
             }
             else if (UINum == 2)
             {
                 Console.Clear();
-                PPLog();
+                PPLog(p);
             }
             else if (UINum == 3)
             {
@@ -473,14 +474,39 @@ namespace main
             }
         }
 
-        public void PPStatusEG()
+        public void PPStatusEG(plant p)                         //ispisuje podatke o prosledjenom powerplant-u
         {
-            //To be added
+
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+            if (p.Status)
+            {
+                Console.WriteLine("\n\nTrenutno stanje elektrane je: UKLJUCENA. Proizvodnja je na: {0}%\n\n",p.Output);
+            }
+            else
+            {
+                Console.WriteLine("\n\nTrenutno stanje elektrane je: ISKLJUCENA. Proizvodnja je na: {0}%\n\n", p.Output);
+            }
+
+            PowerPlantUI(p);                                    //Vraca na odabir opcija za powerplant
+
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+
         }
 
-        public void PPLog()
+        public void PPLog(plant p)                              //Ispisuje sadrzaj log fajla
         {
-            //To be added
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+
+            p.read();                                           //Poziva fukciju za ispis iz fajla
+            PowerPlantUI(p);                                    //Vraca na odabir opcija za powerplant
+
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }

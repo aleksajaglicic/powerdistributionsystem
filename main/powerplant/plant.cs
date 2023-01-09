@@ -84,7 +84,7 @@ namespace Projekat.powerplant
        public void Save(plant p)
         {
             StreamWriter sw = null;
-            string file = "C:\Users\kopitar\source\repos\Powerplant\main\powerplant"; //lokacija fajla u koji se cuvaju podaci
+            string file = Environment.CurrentDirectory + "Plant_data.txt"; //lokacija fajla u koji se cuvaju podaci
 
             try
             {
@@ -101,6 +101,24 @@ namespace Projekat.powerplant
             catch (Exception e)
             {
                 //Console.WriteLine("Upis nije uspesan");
+                Console.WriteLine(e.StackTrace);
+            }
+        }
+
+        public void read ()                                 //Funkcija za citanje podataka iz fajla i ispis
+        {
+            StreamReader sr = null;
+            string file = Environment.CurrentDirectory + "Plant_data.txt";      //lokacija fajla
+
+            try
+            {
+                string read = File.ReadAllText(file);                           //reader sza file
+                Console.WriteLine("Powerplant logs: \n {0}",read);              //ispis procitanog sadrzaja fajla
+
+            }
+            catch(Exception e)                                                  //hvatanje greske ako se ne cita dobro fajl
+            {
+                //Console.WriteLine("Citanje nije uspesno");
                 Console.WriteLine(e.StackTrace);
             }
         }
