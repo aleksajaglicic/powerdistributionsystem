@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Projekat.powerplant
+namespace main.powerplant
 {
     public class plant
     {
