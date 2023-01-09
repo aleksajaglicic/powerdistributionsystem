@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Projekat.powerplant
+namespace main.powerplant
 {
     public class plant
     {
-
         private int power=1000;
         private int output=0;
         private bool  status=false;
@@ -30,7 +29,6 @@ namespace Projekat.powerplant
             set { status = value; }
         }
         
-        
         public plant(plant p)
         {
             this.power = p.power;
@@ -41,35 +39,36 @@ namespace Projekat.powerplant
         {
             if (output > power)
             {
-                throw new ArgumentException("Ne moze da proizvodi vise od svoje snage");
+                throw new ArgumentException("Cannot genererate more than its own power...");
             }
+            
             if (output > 0 && status==false)
             {
-                throw new ArgumentException("Ne moze da proizvodi struju ako je ugasena");
-
+                throw new ArgumentException("Cannot generate if plant is off...");
             }
+            
             this.power = power;
             this.output = output;
             this.status = status;
         }
 
-        public int ukljuciElektranu(int proizvodnja, int potrosnja) //PRIMA PROIZVODNJU U SISTEMU (solarni paneli i vetrenjace) I POTROSNJU DA BI SE ZNALO KOLIKO TREBA DA GENERISE
+        public int turnOnPlant(int generatedPower, int usedPower)
         {
             int ret;
-            int pow_needed = potrosnja - proizvodnja;     //KOLIKO JE POTREBNO STRUJE PROIZVESTI  
-            if (pow_needed <= 0)      //PANELI I VETRENJACE SU DOVOLJNE ZA NAPAJANJE SISTEMA
+            int pow_needed = usedPower - generatedPower;
+            if (pow_needed <= 0)
             {
-                power = 1000;                           //KOLIKO ELEKTRANA MOZE DA PROIZVEDE KADA JE UKLJUCENA NA 100%
-                output = 0;                             //ELEKTRANA NE PROIZVODI NISTA
-                status = false;                         //ELEKTRANA JE ISKLJUCENA
-                ret=0;                               //VRACA 0 JER JE ISKLJUCENA
+                power = 1000;
+                output = 0; 
+                status = false;
+                ret=0;
 
             }
             else
             {
-                output = (100 * pow_needed) / power;      //PROIZVODNJA SE POSTAVLJA NA POTREBAN PROCENAT
-                status = true;                          //ELEKTRANA JE UKLJUCENA
-                ret=1;                               //AKO JE UKLJUCENA VRACA 1
+                output = (100 * pow_needed) / power;
+                status = true;
+                ret=1;
             }
 
             Save(this);
@@ -84,18 +83,15 @@ namespace Projekat.powerplant
        public void Save(plant p)
         {
             StreamWriter sw = null;
-            string file = "C:\Users\kopitar\source\repos\Powerplant\main\powerplant"; //lokacija fajla u koji se cuvaju podaci
+            string file = Environment.CurrentDirectory + "/files/SolarWindInstances.txt";
 
             try
             {
-                sw = File.AppendText(file);                                     //(appandText) da bi se sacuvali prethodni podaci fajla     
+                sw = File.AppendText(file);
+                DateTime time = DateTime.Now;
+                string write = output.ToString() + "% " + " " + time;
 
-                DateTime time = DateTime.Now;                                   //trenutno vreme (timestamp promene rezima elektrane)
-
-                string write = output.ToString() + "% " + " " + time;            //String koji se pise u fajl
-
-                sw.WriteLine(write);                                            //Upis u fajl
-                //Console.WriteLine("Upis uspesan");
+                sw.WriteLine(write);
                 sw.Close();
             }
             catch (Exception e)
@@ -104,7 +100,5 @@ namespace Projekat.powerplant
                 Console.WriteLine(e.StackTrace);
             }
         }
-
-
     }
 }

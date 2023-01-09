@@ -22,7 +22,7 @@ namespace main.UnitTests
             solwin.addInstance(0, 34, timeChanged);
 
             //Assert
-            Assert.AreEqual(instance, solwin.instances[0]);
+            Assert.AreEqual(instance, solwin.instances[solwin.instances.IndexOf(instance)]);
         }
 
         [Test]

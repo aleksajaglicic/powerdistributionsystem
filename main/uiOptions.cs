@@ -1,27 +1,28 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using main.consumer;
 using ConsoleTables;
+using main.consumer;
 
 namespace main
 {
     class UiOptions
     {
         private int uiNum;
-        private solwin.Solwin sw = new solwin.Solwin();
-        LogicFunctions pomocna = new LogicFunctions();
-        LogicFunctions lista= new LogicFunctions();
-        private int brojac = 0;
+        public solwin.Solwin sw = new solwin.Solwin();
+        private int counter = 0;
+        public System.Random random = new System.Random();
+        LogicFunctions listH = new LogicFunctions();
+        LogicFunctions list = new LogicFunctions();
 
         public int UINum
         {
             get { return uiNum; }
             set { uiNum = value; }
         }
-        
+
         public UiOptions(int ui)
         {
             UINum = ui;
@@ -31,6 +32,14 @@ namespace main
 
         public void MainUI()
         {
+
+            //var startTimeSpan = TimeSpan.Zero;
+            //var periodTimeSpan = TimeSpan.FromMinutes(5);
+            //var timer = new System.Threading.Timer((e) =>
+            //{
+            //   ChangeSunWind();
+            //}, null, 5000, 30000);
+
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
 
@@ -103,37 +112,37 @@ namespace main
             ////////
 
             Console.WriteLine("\nPlease select one of the following:");
-            Console.WriteLine("\\\\\\\\ 0.Select Existing Sockets");
-            Console.WriteLine("\\\\\\\\ 1.Add Connection Sockets");
-            Console.WriteLine("\\\\\\\\ 2.Erase Connection Sockets");
-            Console.WriteLine("\\\\\\\\ 3.View all Connected Sockets");
-            Console.WriteLine("\\\\\\\\ 4.Return to main menu\n");
+            Console.WriteLine("\\\\\\\\ 1.Select Existing Sockets");
+            Console.WriteLine("\\\\\\\\ 2.Add Connection Sockets");
+            Console.WriteLine("\\\\\\\\ 3.Erase Connection Sockets");
+            Console.WriteLine("\\\\\\\\ 4.View all Connected Sockets");
+            Console.WriteLine("\\\\\\\\ 5.Return to main menu\n");
 
             Console.WriteLine("Go to option: ");
             UINum = Int32.Parse(Console.ReadLine());
 
             //Selected options
-            if (UINum == 0)
+            if (UINum == 1)
             {
                 Console.Clear();
                 SelectUI();
             }
-            else if (UINum == 1)
+            else if (UINum == 2)
             {
                 Console.Clear();
                 AddUI();
             }
-            else if (UINum == 2)
+            else if (UINum == 3)
             {
                 Console.Clear();
                 EraseUI();
             }
-            else if (UINum == 3)
+            else if (UINum == 4)
             {
                 Console.Clear();
                 ViewSockets();
             }
-            else if (UINum == 4)
+            else if (UINum == 5)
             {
                 Console.Clear();
                 MainUI();
@@ -155,27 +164,28 @@ namespace main
 
         public void SelectUI()
         {
-            if (brojac < 1)
+            if (counter < 1)
             {
-                pomocna.Ucitaj_iz_fajla(@"Ucitavanje.txt");
+                listH.ReadFromFile("./files/LoadInstances.txt");
             }
-            Console.WriteLine(pomocna);
-            Console.WriteLine();
+            var table = new ConsoleTable("Id:", "Name: ", "Power:");
 
-            if (pomocna.arhiva.Count == 0)
+            ConsoleTable.From<Consumer>(listH.archive.ToList()).Write();
+
+            if (listH.archive.Count == 0)
             {
                 ConsumerUI();
             }
-            Console.WriteLine("Izaberi postojeci prikljucak na osnovu ID");
+            Console.WriteLine("Enter existing socket based on id:");
 
             int id = Int32.Parse(Console.ReadLine());
 
-            Consumer c1 = pomocna.Find(id);
-            pomocna.Remove(id);
-            lista.Add(c1);
-            lista.Upisi_u_fajl("TestPogled.txt");
+            Consumer c1 = listH.Find(id);
+            listH.Remove(id);
+            list.Add(c1);
+            list.WriteToFile("./files/SocketInstances.txt");
 
-            brojac++;
+            counter++;
 
             Console.Clear();
             ConsumerUI();
@@ -184,23 +194,23 @@ namespace main
 
         public void AddUI()
         {
-            Console.WriteLine("Unesite ID od novog prikljucka ");
+            Console.WriteLine("Enter socket id:");
 
             int id = Int32.Parse(Console.ReadLine());
 
-            Console.WriteLine("Unesite naziv od novog prikljucka ");
+            Console.WriteLine("Enter socket name:");
 
-            string naziv = Console.ReadLine();
+            string name = Console.ReadLine();
 
-            Console.WriteLine("Unesite potrosnju u kWH od novog prikljucka ");
+            Console.WriteLine("Enter socket power usage:");
 
             int kwh = Int32.Parse(Console.ReadLine());
 
-            Consumer c = new Consumer(id, naziv, kwh);
+            Consumer c = new Consumer(id, name, kwh);
 
-            lista.Add(c);
-            lista.Upisi_u_fajl("TestPogled.txt");
-            Console.WriteLine(lista);
+            list.Add(c);
+            list.WriteToFile("./files/SocketInstances.txt");
+            Console.WriteLine(list);
 
             Console.Clear();
             ConsumerUI();
@@ -209,25 +219,31 @@ namespace main
 
         public void EraseUI()
         {
-            Console.WriteLine("Unesite ID od prikljucka kojeg zelite da obriste");
+            Console.WriteLine("Enter id of socket to erase:");
             int id = Int32.Parse(Console.ReadLine());
 
-            lista.Remove(id);
-            lista.Upisi_u_fajl("TestPogled.txt");
-            Console.WriteLine(lista);
+            list.Remove(id);
+            list.WriteToFile("./files/SocketInstances.txt");
+            Console.WriteLine(list);
 
             Console.Clear();
             ConsumerUI();
-
         }
-
 
         public void ViewSockets()
         {
-            Console.WriteLine(lista);
-            lista.Upisi_u_fajl("TestPogled.txt");
+            if(list.archive.Count == 0)
+            {
+                Console.WriteLine("No Instances turned on...");
+            }
+            else
+            { 
+                var table = new ConsoleTable("Id:", "Name: ", "Power:");
+                ConsoleTable.From<Consumer>(list.archive.ToList()).Write();
+            }
+            
+            Console.WriteLine();
             ConsumerUI();
-
         }
 
         public void DistributionCenterUI()
@@ -369,13 +385,67 @@ namespace main
             if (UINum == 1)
             {
                 Console.Clear();
-                sw.addInstance();
+
+                int choice;
+                int choicePower;
+                int power;
+
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.WriteLine("Please choose panel or generator (0 or 1):");
+
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.White;
+                choice = Int32.Parse(Console.ReadLine());
+                Console.Clear();
+
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.WriteLine("Please choose rand power value or chosen value (0 or 1):");
+
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.White;
+                choicePower = Int32.Parse(Console.ReadLine());
+                Console.Clear();
+
+                if (choicePower == 1)
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.White;
+
+                    Console.WriteLine("Please choose power value:");
+
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    power = Int32.Parse(Console.ReadLine());
+                    Console.Clear();
+                }
+                else
+                {
+                    power = random.Next(0, 100);
+                }
+
+                sw.addInstance(choice, power, DateTime.Now);
                 AddEraseSolWinUI();
             }
             else if (UINum == 2)
             {
                 Console.Clear();
-                sw.eraseInstance();
+                int eraseId;
+
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.WriteLine("Enter the id of the instance you wish to erase:");
+
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.White;
+                eraseId = Int32.Parse(Console.ReadLine());
+                Console.Clear();
+
+                sw.eraseInstance(eraseId);
                 AddEraseSolWinUI();
             }
             else if (UINum == 3)
@@ -412,14 +482,70 @@ namespace main
 
         public void ChangeSunWind()
         {
-            sw.changePower();
-            Console.WriteLine("Return to previous menu? (1 for yes)");
+            sw.viewList();
+            Console.WriteLine();
+
+            int id;
+            int power;
+
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.WriteLine("Please enter id of instance you wish to change the power of:");
+
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+            id = Int32.Parse(Console.ReadLine());
+
+            Console.Clear();
+
+            sw.readFromFile();
+            if (sw.existsById(id))
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.WriteLine("Please enter the power you wish to change to:");
+
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.White;
+                power = Int32.Parse(Console.ReadLine());
+
+                sw.change(id, power);
+            }
+
+            Console.WriteLine("Return to previous menu or view change? (0 or 1)");
             UINum = Int32.Parse(Console.ReadLine());
 
-            if (uiNum == 1)
+            if (uiNum == 0)
             {
                 Console.Clear();
                 SolarWindUI();
+            }
+            else if(uiNum == 1)
+            {
+                Console.Clear();
+                sw.viewList();
+                Console.WriteLine("Return to previous menu? (1 for yes)");
+                UINum = Int32.Parse(Console.ReadLine());
+
+                if(uiNum == 1)
+                {
+                    Console.Clear();
+                    SolarWindUI();
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.White;
+
+                    Console.WriteLine("ERROR: ui number out of range... Try again");
+                    SolarWindUI();
+
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
             }
         }
 
