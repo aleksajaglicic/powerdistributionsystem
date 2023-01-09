@@ -200,13 +200,13 @@ namespace main
 
             Console.WriteLine("Enter socket name:");
 
-            string naziv = Console.ReadLine();
+            string name = Console.ReadLine();
 
             Console.WriteLine("Enter socket power usage:");
 
             int kwh = Int32.Parse(Console.ReadLine());
 
-            Consumer c = new Consumer(id, naziv, kwh);
+            Consumer c = new Consumer(id, name, kwh);
 
             list.Add(c);
             list.WriteToFile("./files/SocketInstances.txt");
