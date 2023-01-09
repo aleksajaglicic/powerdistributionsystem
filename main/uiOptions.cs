@@ -427,7 +427,7 @@ namespace main
                     power = random.Next(0, 100);
                 }
 
-                sw.addInstance(choice, choicePower);
+                sw.addInstance(choice, power, DateTime.Now);
                 AddEraseSolWinUI();
             }
             else if (UINum == 2)
