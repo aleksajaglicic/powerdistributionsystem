@@ -10,13 +10,13 @@ namespace main.consumer
     public class Consumer
     {
         private int id;
-        private string naziv;
+        private string name;
         private int kWh;
 
-        public Consumer(int id = 0, string naziv = "nepoznat", int kWh = 0)
+        public Consumer(int id = 0, string name = "unknown", int kWh = 0)
         {
             this.id = id;
-            this.naziv = naziv;
+            this.name = name;
             this.kWh = kWh;
         }
 
@@ -26,10 +26,10 @@ namespace main.consumer
             set { id = value; }
         }
 
-        public string Naziv
+        public string Name
         {
-            get { return naziv; }
-            set { naziv = value; }
+            get { return name; }
+            set { name = value; }
         }
 
         public int KWH
@@ -40,7 +40,7 @@ namespace main.consumer
 
         public override String ToString()
         {
-            return " " + id + "\t" + naziv + "\t" + "\t" + kWh + "\t";
+            return id + "\t|\t" + name + "\t|\t" + kWh;
         }
     }
 }
