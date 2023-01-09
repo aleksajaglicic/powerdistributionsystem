@@ -551,7 +551,7 @@ namespace main
             }
         }
 
-        public void PowerPlantUI(plant p)                       //prima powerplant 
+        public void PowerPlantUI(plant p)
         {
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
@@ -601,7 +601,7 @@ namespace main
             }
         }
 
-        public void PPStatusEG(plant p)                         //ispisuje podatke o prosledjenom powerplant-u
+        public void PPStatusEG(plant p)
         {
 
             Console.Clear();
@@ -609,28 +609,28 @@ namespace main
             Console.ForegroundColor = ConsoleColor.White;
             if (p.Status)
             {
-                Console.WriteLine("\n\nTrenutno stanje elektrane je: UKLJUCENA. Proizvodnja je na: {0}%\n\n",p.Output);
+                Console.WriteLine("\n\nCurrent state of Power Plant: ON\t Generated: {0}%\n\n",p.Output);
             }
             else
             {
-                Console.WriteLine("\n\nTrenutno stanje elektrane je: ISKLJUCENA. Proizvodnja je na: {0}%\n\n", p.Output);
+                Console.WriteLine("\n\nCurrent state of Power Plant: OFF\t Generated: {0}%\n\n", p.Output);
             }
 
-            PowerPlantUI(p);                                    //Vraca na odabir opcija za powerplant
+            PowerPlantUI(p);
 
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
 
         }
 
-        public void PPLog(plant p)                              //Ispisuje sadrzaj log fajla
+        public void PPLog(plant p)
         {
             Console.Clear();
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
 
-            p.read();                                           //Poziva fukciju za ispis iz fajla
-            PowerPlantUI(p);                                    //Vraca na odabir opcija za powerplant
+            p.read();
+            PowerPlantUI(p);
 
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
