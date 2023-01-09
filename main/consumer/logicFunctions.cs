@@ -5,33 +5,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace main.consumer
 {
     public class LogicFunctions
     {
-        public List<Consumer> arhiva;
+        public List<Consumer> archive;
         public LogicFunctions()
         {
-            arhiva = new List<Consumer>();
+            archive = new List<Consumer>();
         }
 
         public bool Add(Consumer c)
         {
-            for (int i = 0; i < arhiva.Count; i++)
-                if ((arhiva[i]).Id == c.Id)
+            for (int i = 0; i < archive.Count; i++)
+                if ((archive[i]).Id == c.Id)
                     return false;
 
-            arhiva.Add(c);
+            archive.Add(c);
             return true;
         }
 
         public bool Remove(int id)
         {
-            for (int i = 0; i < arhiva.Count; i++)
-                if ((arhiva[i]).Id == id)
+            for (int i = 0; i < archive.Count; i++)
+                if ((archive[i]).Id == id)
                 {
-                    arhiva.RemoveAt(i);
+                    archive.RemoveAt(i);
                     return true;
                 }
 
@@ -39,24 +38,24 @@ namespace main.consumer
         }
         public Consumer Find(int id)
         {
-            for (int i = 0; i < arhiva.Count; i++)
-                if ((arhiva[i]).Id == id)
-                    return arhiva[i];
+            for (int i = 0; i < archive.Count; i++)
+                if ((archive[i]).Id == id)
+                    return archive[i];
 
             return null;
         }
 
         public override String ToString()
         {
-            if (arhiva.Count == 0) return "U arhivi nema uredjaja!";
+            if (archive.Count == 0) return "There are no instances in archive!";
 
-            String str = "|ID|\tNAZIV\t\t|\tKWH\t|\n";
-            foreach (Consumer c in arhiva)
+            String str = "";
+            foreach (Consumer c in archive)
                 str += c + "\n";
             return str;
         }
 
-        public void Upisi_u_fajl(string file)
+        public void WriteToFile(string file)
         {
             StreamWriter sw = null;
 
@@ -72,31 +71,26 @@ namespace main.consumer
             }
         }
 
-
-
-        public void Ucitaj_iz_fajla(string file)
+        public void ReadFromFile(string file)
         {
             StreamReader sr = null;
-            string naziv;
+            string name;
             int id;
             int kwh;
-            string linija;
+            string line;
 
             try
             {
                 sr = new StreamReader(file);
 
-
-                while ((linija = sr.ReadLine()) != null)
+                while ((line = sr.ReadLine()) != null)
                 {
-                    //razdvajanje po delimiteru |
-                    string[] lineParts = linija.Split('|');
-
-                    naziv = lineParts[0];
-                    id = Int32.Parse(lineParts[1]);
+                    string[] lineParts = line.Split('|');
+                    name = lineParts[1];
+                    id = Int32.Parse(lineParts[0]);
                     kwh = Int32.Parse(lineParts[2]);
 
-                    arhiva.Add(new Consumer(id, naziv, kwh));
+                    archive.Add(new Consumer(id, name, kwh));
                 }
             }
             catch (Exception e)
@@ -112,7 +106,5 @@ namespace main.consumer
                 }
             }
         }
-
-
     }
 }
