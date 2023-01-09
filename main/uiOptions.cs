@@ -166,7 +166,7 @@ namespace main
         {
             if (counter < 1)
             {
-                listH.ReadFromFile("LoadInstances.txt");
+                listH.ReadFromFile("./files/LoadInstances.txt");
             }
             var table = new ConsoleTable("Id:", "Name: ", "Power:");
 
@@ -183,7 +183,7 @@ namespace main
             Consumer c1 = listH.Find(id);
             listH.Remove(id);
             list.Add(c1);
-            list.WriteToFile("SocketInstances.txt");
+            list.WriteToFile("./files/SocketInstances.txt");
 
             counter++;
 
@@ -209,7 +209,7 @@ namespace main
             Consumer c = new Consumer(id, naziv, kwh);
 
             list.Add(c);
-            list.WriteToFile("SocketInstances.txt");
+            list.WriteToFile("./files/SocketInstances.txt");
             Console.WriteLine(list);
 
             Console.Clear();
@@ -223,7 +223,7 @@ namespace main
             int id = Int32.Parse(Console.ReadLine());
 
             list.Remove(id);
-            list.WriteToFile("SocketInstances.txt");
+            list.WriteToFile("./files/SocketInstances.txt");
             Console.WriteLine(list);
 
             Console.Clear();
