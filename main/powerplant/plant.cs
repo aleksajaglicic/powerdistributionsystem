@@ -83,7 +83,8 @@ namespace main.powerplant
        public void Save(plant p)
         {
             StreamWriter sw = null;
-            string file = Environment.CurrentDirectory + "/files/SolarWindInstances.txt";
+            string file = Environment.CurrentDirectory + "/files/Plant_data.txt";
+
 
             try
             {
@@ -97,6 +98,24 @@ namespace main.powerplant
             catch (Exception e)
             {
                 //Console.WriteLine("Upis nije uspesan");
+                Console.WriteLine(e.StackTrace);
+            }
+        }
+
+        public void read ()
+        {
+            StreamReader sr = null;
+            string file = Environment.CurrentDirectory + "Plant_data.txt";
+
+            try
+            {
+                string read = File.ReadAllText(file);
+                Console.WriteLine("Powerplant logs: \n {0}",read);
+
+            }
+            catch(Exception e)
+            {
+                //Console.WriteLine("Citanje nije uspesno");
                 Console.WriteLine(e.StackTrace);
             }
         }
