@@ -37,12 +37,17 @@ namespace powerdistributionsystem
         /// </summary>
         public void MainUI()
         {
-            //var startTimeSpan = TimeSpan.Zero;
-            //var periodTimeSpan = TimeSpan.FromMinutes(5);
-            //var timer = new System.Threading.Timer((e) =>
-            //{
-            //    ChangeSunWind();
-            //}, null, 5000, 30000);
+            var startTimeSpan = TimeSpan.Zero;
+            var periodTimeSpan = TimeSpan.FromMinutes(5);
+            var timer = new System.Threading.Timer((e) =>
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("Must change solar/wind power value!");
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.White;
+
+            }, null, 25000, 40000);
 
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
