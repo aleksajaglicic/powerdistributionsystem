@@ -1,2 +1,4 @@
-1	|	Sijalica	|	50
+1|Sijalica|50
+2|Sporet|45
+3|Usisivac|80
 

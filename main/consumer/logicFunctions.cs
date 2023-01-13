@@ -5,16 +5,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace main.consumer
+namespace powerdistributionsystem.consumer
 {
+    /// <summary>
+    /// This class performs consumer methods
+    /// </summary>
     public class LogicFunctions
     {
+        /// <summary>
+        /// List used for methods
+        /// </summary>
         public List<Consumer> archive;
+        /// <summary>
+        /// Constructor for logic functions class
+        /// </summary>
         public LogicFunctions()
         {
             archive = new List<Consumer>();
         }
 
+        /// <summary>
+        /// Add socket instance method
+        /// </summary>
+        /// <param name="c">Consumer instance</param>
+        /// <returns>boolean which is the success/failure of the addition</returns>
         public bool Add(Consumer c)
         {
             for (int i = 0; i < archive.Count; i++)
@@ -25,6 +39,11 @@ namespace main.consumer
             return true;
         }
 
+        /// <summary>
+        /// Remove socket instance method
+        /// </summary>
+        /// <param name="id">Instance ID</param>
+        /// <returns>boolean which is the success/failure of the removal</returns>
         public bool Remove(int id)
         {
             for (int i = 0; i < archive.Count; i++)
@@ -36,6 +55,12 @@ namespace main.consumer
 
             return false;
         }
+
+        /// <summary>
+        /// Method for finding instance in list
+        /// </summary>
+        /// <param name="id">Instance ID</param>
+        /// <returns>socket instance from list</returns>
         public Consumer Find(int id)
         {
             for (int i = 0; i < archive.Count; i++)
@@ -45,6 +70,10 @@ namespace main.consumer
             return null;
         }
 
+        /// <summary>
+        /// ToString method for logic functions class
+        /// </summary>
+        /// <returns></returns>
         public override String ToString()
         {
             if (archive.Count == 0) return "There are no instances in archive!";
@@ -55,6 +84,10 @@ namespace main.consumer
             return str;
         }
 
+        /// <summary>
+        /// Writes string to file
+        /// </summary>
+        /// <param name="file">Output file</param>
         public void WriteToFile(string file)
         {
             StreamWriter sw = null;
@@ -71,6 +104,10 @@ namespace main.consumer
             }
         }
 
+        /// <summary>
+        /// Reads instances from file and adds them to the socket list
+        /// </summary>
+        /// <param name="file">Input file</param>
         public void ReadFromFile(string file)
         {
             StreamReader sr = null;

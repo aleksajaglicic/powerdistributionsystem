@@ -5,117 +5,148 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace main.powerplant
+namespace powerdistributionsystem.powerplant
 {
-    public class plant
+    /// <summary>
+    /// This class represent a power plant
+    /// </summary>
+    public class Plant
     {
-        private int power=1000;
-        private int output=0;
-        private bool  status=false;
+        private int output = 0;
+        /// <summary>
+        /// Power plant status
+        /// </summary>
+        public bool status = false;
+        /// <summary>
+        /// File path for power plant log file
+        /// </summary>
+        public string file = Environment.CurrentDirectory + "/files/PlantData.txt";
 
-        public int Power
-        {
-            get { return power; }
-            set { power = value; }
-        }
+        /// <summary>
+        /// Output power from power plant
+        /// </summary>
         public int Output
         {
             get { return output; }
             set { output = value; }
         }
+
+        /// <summary>
+        /// Power plant status
+        /// </summary>
         public bool Status
         {
             get { return status; }
             set { status = value; }
         }
-        
-        public plant(plant p)
+
+        /// <summary>
+        /// Constructor for power plant class
+        /// </summary>
+        public Plant(Plant p)
         {
-            this.power = p.power;
             this.output = p.output;
             this.status = p.status;
         }
-        public plant(int power=1000, int output=0, bool status=false)
+
+        /// <summary>
+        /// Constructor for power plant class
+        /// </summary>
+        public Plant(int output = 0, bool status = false)
         {
-            if (output > power)
-            {
-                throw new ArgumentException("Cannot genererate more than its own power...");
-            }
-            
-            if (output > 0 && status==false)
-            {
-                throw new ArgumentException("Cannot generate if plant is off...");
-            }
-            
-            this.power = power;
             this.output = output;
             this.status = status;
         }
 
+        /// <summary>
+        /// Method for turning on power plant
+        /// </summary>
+        /// <param name="generatedPower">Power from panel/gen instances</param>
+        /// <param name="usedPower">Power from socket instances</param>
+        /// <returns>bool which determines whether the power plant is on</returns>
         public int turnOnPlant(int generatedPower, int usedPower)
         {
             int ret;
             int pow_needed = usedPower - generatedPower;
             if (pow_needed <= 0)
             {
-                power = 1000;
-                output = 0; 
+                output = 0;
                 status = false;
-                ret=0;
-
+                ret = 0;
+            }
+            else if (pow_needed <= 100)
+            {
+                output = pow_needed;
+                status = true;
+                ret = 1;
             }
             else
             {
-                output = (100 * pow_needed) / power;
-                status = true;
-                ret=1;
+                output = 0;
+                status = false;
+                ret = 0;
             }
-
-            Save(this);
             return ret;
         }
 
+        /// <summary>
+        /// ToString method for power plant class
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
-            return  power + "\t|\t" + output+ "\t|\t" + status;
+            return output + "\t|\t" + status;
         }
 
-       public void Save(plant p)
+        /// <summary>
+        /// Saves power plant information to log file
+        /// </summary>
+        /// <param name="p">Power Plant instance</param>
+        /// <param name="file">Output file</param>
+        public void Save(Plant p, string file)
         {
             StreamWriter sw = null;
-            string file = Environment.CurrentDirectory + "/files/Plant_data.txt";
+            string onOff = "";
 
+            if (p.status)
+            {
+                onOff += "ON";
+            }
+            else
+            {
+                onOff = "OFF";
+            }
 
             try
             {
                 sw = File.AppendText(file);
                 DateTime time = DateTime.Now;
-                string write = output.ToString() + "% " + " " + time;
+                string write = output.ToString() + "% " + " " + time + " Turned: " + onOff;
 
                 sw.WriteLine(write);
                 sw.Close();
             }
             catch (Exception e)
             {
-                //Console.WriteLine("Upis nije uspesan");
                 Console.WriteLine(e.StackTrace);
             }
         }
 
-        public void read ()
-        {
-            StreamReader sr = null;
-            string file = Environment.CurrentDirectory + "Plant_data.txt";
 
+        /// <summary>
+        /// Reads power plant log from log file
+        /// </summary>
+        /// <param name="file">Output file</param>
+        public void read(string file)
+        {
             try
             {
                 string read = File.ReadAllText(file);
-                Console.WriteLine("Powerplant logs: \n {0}",read);
+                Console.WriteLine("Powerplant logs: \n{0}", read);
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                //Console.WriteLine("Citanje nije uspesno");
                 Console.WriteLine(e.StackTrace);
             }
         }

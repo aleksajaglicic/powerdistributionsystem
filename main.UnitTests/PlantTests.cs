@@ -1,63 +1,77 @@
-﻿using NUnit.Framework;
+﻿using Moq;
+using NUnit.Framework;
+using powerdistributionsystem.powerplant;
 using System;
 
-namespace main
+namespace powerdistributionsystem.UnitTests
 {
 
-    public class Tests
+    public class PlantTests
     {
         [Test]
-        [TestCase(1000, 200, true)]
-        [TestCase(null, null, null)]
-
-
-        public void PlantKOnstruktorDobriParametri(int power, int output, bool status)
+        public void turnOn_Plant_PowerFullfiled()
         {
-            Projekat.powerplant.plant p = new Projekat.powerplant.plant(power, output, status);
-            Assert.AreEqual(p.Power, power);
-            Assert.AreEqual(p.Output, output);
-            Assert.AreEqual(p.Status, status);
+            //Arrange
+            int generatedPower = 34;
+            int usedPower = 24;
+            var plant = new Plant();
 
-        }
-        [Test]
-        [TestCase(1000, 1500, true)]
-        [TestCase(1000, 500, false)]
-        public void PlantKOnstruktorLosiParametri(int power, int output, bool status)
-        {
-            Assert.Throws<ArgumentException>(() =>
-            {
-                Projekat.powerplant.plant p = new Projekat.powerplant.plant(power, output, status);
-            });
+            //Act
+            plant.turnOnPlant(generatedPower, usedPower);
 
-        }
-
-
-
-
-        //mock test
-
-        plant p1;
-        [SetUp]
-        public void SetUp()
-        {
-            var moq = new Mock<plant>();
-            moq.Setup(p => p.Status).Returns(false);
-            p1 = moq.Object;
+            //Assert
+            Assert.AreEqual(false, plant.Status);
         }
 
         [Test]
-        [TestCase(1000, 0)]
-
-        public void WriteIntoFile(int power, int output)
+        public void turnOn_Plant_PowerUnfullfiled()
         {
+            //Arrange
+            int generatedPower = 34;
+            int usedPower = 74;
+            var plant = new Plant();
 
-            plant p = new plant(p1);
+            //Act
+            plant.turnOnPlant(generatedPower, usedPower);
 
-            Assert.AreEqual(p, p1);
-            Assert.AreEqual(p.Power, power);
-            Assert.AreEqual(p.Output, output);
-            Assert.AreEqual(p.Status, p1.Status);
+            //Assert
+            Assert.AreEqual(true, plant.Status);
         }
 
+        [Test]
+        public void turnOn_Plant_PowerExceeds()
+        {
+            //Arrange
+            int generatedPower = 34;
+            int usedPower = 1000;
+            var plant = new Plant();
+
+            //Act
+            plant.turnOnPlant(generatedPower, usedPower);
+
+            //Assert
+            Assert.AreEqual(false, plant.Status);
+        }
+
+        //Plant p1;
+        //[SetUp]
+        //public void SetUp()
+        //{
+        //    var moq = new Mock<Plant>();
+        //    moq.Setup(p => p.Status).Returns(false);
+        //    p1 = moq.Object;
+        //}
+
+        //[Test]
+        //[TestCase(0)]
+
+        //public void WriteIntoFile(int output)
+        //{
+        //    Plant p = new Plant(p1);
+
+        //    Assert.AreEqual(p, p1);
+        //    Assert.AreEqual(p.Output, output);
+        //    Assert.AreEqual(p.Status, p1.Status);
+        //}
     }
 }

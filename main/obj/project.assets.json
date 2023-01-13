@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\aleksa2\\Desktop\\pr\\main_solution\\main\\main.csproj",
-      "projectName": "main",
-      "projectPath": "C:\\Users\\aleksa2\\Desktop\\pr\\main_solution\\main\\main.csproj",
+      "projectUniqueName": "C:\\Users\\aleksa2\\source\\repos\\aleksajaglicic\\powerdistributionsystem\\main\\powerdistributionsystem.csproj",
+      "projectName": "powerdistributionsystem",
+      "projectPath": "C:\\Users\\aleksa2\\source\\repos\\aleksajaglicic\\powerdistributionsystem\\main\\powerdistributionsystem.csproj",
       "packagesPath": "C:\\Users\\aleksa2\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\aleksa2\\Desktop\\pr\\main_solution\\main\\obj\\",
+      "outputPath": "C:\\Users\\aleksa2\\source\\repos\\aleksajaglicic\\powerdistributionsystem\\main\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\aleksa2\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -27,7 +27,6 @@
         "net5.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

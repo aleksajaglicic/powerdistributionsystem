@@ -1254,14 +1254,14 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
-      "main/1.0.0": {
+      "powerdistributionsystem/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "compile": {
-          "bin/placeholder/main.dll": {}
+          "bin/placeholder/powerdistributionsystem.dll": {}
         },
         "runtime": {
-          "bin/placeholder/main.dll": {}
+          "bin/placeholder/powerdistributionsystem.dll": {}
         }
       }
     }
@@ -4953,10 +4953,10 @@
         "system.xml.xpath.xmldocument.nuspec"
       ]
     },
-    "main/1.0.0": {
+    "powerdistributionsystem/1.0.0": {
       "type": "project",
-      "path": "../main/main.csproj",
-      "msbuildProject": "../main/main.csproj"
+      "path": "../main/powerdistributionsystem.csproj",
+      "msbuildProject": "../main/powerdistributionsystem.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -4965,7 +4965,7 @@
       "NUnit >= 3.13.1",
       "NUnit3TestAdapter >= 3.17.0",
       "coverlet.collector >= 3.0.2",
-      "main >= 1.0.0"
+      "powerdistributionsystem >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -4974,11 +4974,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\aleksa2\\Desktop\\main.UnitTests\\main.UnitTests.csproj",
-      "projectName": "main.UnitTests",
-      "projectPath": "C:\\Users\\aleksa2\\Desktop\\main.UnitTests\\main.UnitTests.csproj",
+      "projectUniqueName": "C:\\Users\\aleksa2\\source\\repos\\aleksajaglicic\\powerdistributionsystem\\main.UnitTests\\powerdistributionsystem.UnitTests.csproj",
+      "projectName": "powerdistributionsystem.UnitTests",
+      "projectPath": "C:\\Users\\aleksa2\\source\\repos\\aleksajaglicic\\powerdistributionsystem\\main.UnitTests\\powerdistributionsystem.UnitTests.csproj",
       "packagesPath": "C:\\Users\\aleksa2\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\aleksa2\\Desktop\\main.UnitTests\\obj\\",
+      "outputPath": "C:\\Users\\aleksa2\\source\\repos\\aleksajaglicic\\powerdistributionsystem\\main.UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\aleksa2\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4994,8 +4994,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\aleksa2\\Desktop\\main\\main.csproj": {
-              "projectPath": "C:\\Users\\aleksa2\\Desktop\\main\\main.csproj"
+            "C:\\Users\\aleksa2\\source\\repos\\aleksajaglicic\\powerdistributionsystem\\main\\powerdistributionsystem.csproj": {
+              "projectPath": "C:\\Users\\aleksa2\\source\\repos\\aleksajaglicic\\powerdistributionsystem\\main\\powerdistributionsystem.csproj"
             }
           }
         }
