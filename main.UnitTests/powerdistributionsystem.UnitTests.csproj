@@ -17,4 +17,10 @@
     <ProjectReference Include="..\main\powerdistributionsystem.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>packages\moq\4.18.4\lib\net462\Moq.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

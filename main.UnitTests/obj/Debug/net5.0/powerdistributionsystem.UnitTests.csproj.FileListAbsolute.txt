@@ -17,7 +17,6 @@ C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTe
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\powerdistributionsystem.UnitTests.dll
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\ref\powerdistributionsystem.UnitTests.dll
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\powerdistributionsystem.UnitTests.pdb
-C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\Castle.Core.dll
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\Microsoft.VisualStudio.CodeCoverage.Shim.dll
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\Microsoft.DotNet.InternalAbstractions.dll
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\Microsoft.TestPlatform.CoreUtilities.dll
@@ -30,7 +29,6 @@ C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTe
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\NuGet.Frameworks.dll
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\nunit.framework.dll
-C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\System.Diagnostics.EventLog.dll
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\System.Xml.XPath.XmlDocument.dll
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\cs\Microsoft.TestPlatform.CoreUtilities.resources.dll
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\cs\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
@@ -97,7 +95,6 @@ C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTe
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\zh-Hant\Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
-C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.0\System.Diagnostics.EventLog.dll
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\powerdistributionsystem.dll
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\ConsoleTables.dll
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\powerdistributionsystem.pdb
@@ -112,3 +109,5 @@ C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTe
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\obj\Debug\net5.0\ref\powerdistributionsystem.UnitTests.dll
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\obj\Debug\net5.0\powerdistributionsystem.UnitTests.pdb
 C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\obj\Debug\net5.0\powerdistributionsystem.UnitTests.genruntimeconfig.cache
+C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\powerdistributionsystem.xml
+C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main.UnitTests\bin\Debug\net5.0\Moq.xml

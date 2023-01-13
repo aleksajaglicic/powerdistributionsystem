@@ -8,12 +8,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\aleksa2\source\repos\aleksajaglicic\powerdistributionsystem\main\powerdistributionsystem.xml</DocumentationFile>
+    <DocumentationFile>.\main\powerdistributionsystem.xml</DocumentationFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="packages\" />
-  </ItemGroup>
 
   <ItemGroup>
     <Reference Include="ConsoleTables">

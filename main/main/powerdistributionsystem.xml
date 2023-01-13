@@ -1,0 +1,429 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>powerdistributionsystem</name>
+    </assembly>
+    <members>
+        <member name="T:powerdistributionsystem.consumer.Consumer">
+            <summary>
+            This class represents a consumer instance
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.consumer.Consumer.#ctor(System.Int32,System.String,System.Int32)">
+            <summary>
+            Constructor for consumer instance
+            </summary>
+            <param name="id">Socket ID</param>
+            <param name="name">Socket name</param>
+            <param name="kWh">Socket power value</param>
+        </member>
+        <member name="P:powerdistributionsystem.consumer.Consumer.Id">
+            <summary>
+            Socket ID
+            </summary>
+        </member>
+        <member name="P:powerdistributionsystem.consumer.Consumer.Name">
+            <summary>
+            Socket name
+            </summary>
+        </member>
+        <member name="P:powerdistributionsystem.consumer.Consumer.KWH">
+            <summary>
+            Socket power value
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.consumer.Consumer.ToString">
+            <summary>
+            ToString method for consumer class
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:powerdistributionsystem.consumer.LogicFunctions">
+            <summary>
+            This class performs consumer methods
+            </summary>
+        </member>
+        <member name="F:powerdistributionsystem.consumer.LogicFunctions.archive">
+            <summary>
+            List used for methods
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.consumer.LogicFunctions.#ctor">
+            <summary>
+            Constructor for logic functions class
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.consumer.LogicFunctions.Add(powerdistributionsystem.consumer.Consumer)">
+            <summary>
+            Add socket instance method
+            </summary>
+            <param name="c">Consumer instance</param>
+            <returns>boolean which is the success/failure of the addition</returns>
+        </member>
+        <member name="M:powerdistributionsystem.consumer.LogicFunctions.Remove(System.Int32)">
+            <summary>
+            Remove socket instance method
+            </summary>
+            <param name="id">Instance ID</param>
+            <returns>boolean which is the success/failure of the removal</returns>
+        </member>
+        <member name="M:powerdistributionsystem.consumer.LogicFunctions.Find(System.Int32)">
+            <summary>
+            Method for finding instance in list
+            </summary>
+            <param name="id">Instance ID</param>
+            <returns>socket instance from list</returns>
+        </member>
+        <member name="M:powerdistributionsystem.consumer.LogicFunctions.ToString">
+            <summary>
+            ToString method for logic functions class
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:powerdistributionsystem.consumer.LogicFunctions.WriteToFile(System.String)">
+            <summary>
+            Writes string to file
+            </summary>
+            <param name="file">Output file</param>
+        </member>
+        <member name="M:powerdistributionsystem.consumer.LogicFunctions.ReadFromFile(System.String)">
+            <summary>
+            Reads instances from file and adds them to the socket list
+            </summary>
+            <param name="file">Input file</param>
+        </member>
+        <member name="T:powerdistributionsystem.distributioncenter.Center">
+            <summary>
+            This class performs calculation methods for the power plant
+            </summary>
+        </member>
+        <member name="F:powerdistributionsystem.distributioncenter.Center.sw">
+            <summary>
+            Instance of SolarWind class
+            </summary>
+        </member>
+        <member name="F:powerdistributionsystem.distributioncenter.Center.lf">
+            <summary>
+            Instance of LogicFunctions class
+            </summary>
+        </member>
+        <member name="F:powerdistributionsystem.distributioncenter.Center.fileInstance">
+            <summary>
+            File path for sw instances
+            </summary>
+        </member>
+        <member name="F:powerdistributionsystem.distributioncenter.Center.fileSockets">
+            <summary>
+            File path for socket instances
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.distributioncenter.Center.readInstancesFromFile">
+            <summary>
+            Reads panel/gen instances from file
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.distributioncenter.Center.readSocketsFromFile">
+            <summary>
+            Reads socket instances from file
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.distributioncenter.Center.powerCalculator">
+            <summary>
+            Method for calculating power generated from panel/gen instances
+            </summary>
+            <returns>int of calculated power</returns>
+        </member>
+        <member name="M:powerdistributionsystem.distributioncenter.Center.socketPowerUsage">
+            <summary>
+            Method for calculating power generated from socket instances
+            </summary>
+            <returns>int of calculated power</returns>
+        </member>
+        <member name="T:powerdistributionsystem.powerplant.Plant">
+            <summary>
+            This class represent a power plant
+            </summary>
+        </member>
+        <member name="F:powerdistributionsystem.powerplant.Plant.status">
+            <summary>
+            Power plant status
+            </summary>
+        </member>
+        <member name="F:powerdistributionsystem.powerplant.Plant.file">
+            <summary>
+            File path for power plant log file
+            </summary>
+        </member>
+        <member name="P:powerdistributionsystem.powerplant.Plant.Output">
+            <summary>
+            Output power from power plant
+            </summary>
+        </member>
+        <member name="P:powerdistributionsystem.powerplant.Plant.Status">
+            <summary>
+            Power plant status
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.powerplant.Plant.#ctor(powerdistributionsystem.powerplant.Plant)">
+            <summary>
+            Constructor for power plant class
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.powerplant.Plant.#ctor(System.Int32,System.Boolean)">
+            <summary>
+            Constructor for power plant class
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.powerplant.Plant.turnOnPlant(System.Int32,System.Int32)">
+            <summary>
+            Method for turning on power plant
+            </summary>
+            <param name="generatedPower">Power from panel/gen instances</param>
+            <param name="usedPower">Power from socket instances</param>
+            <returns>bool which determines whether the power plant is on</returns>
+        </member>
+        <member name="M:powerdistributionsystem.powerplant.Plant.ToString">
+            <summary>
+            ToString method for power plant class
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:powerdistributionsystem.powerplant.Plant.Save(powerdistributionsystem.powerplant.Plant,System.String)">
+            <summary>
+            Saves power plant information to log file
+            </summary>
+            <param name="p">Power Plant instance</param>
+            <param name="file">Output file</param>
+        </member>
+        <member name="M:powerdistributionsystem.powerplant.Plant.read(System.String)">
+            <summary>
+            Reads power plant log from log file
+            </summary>
+            <param name="file">Output file</param>
+        </member>
+        <member name="T:powerdistributionsystem.solwin.Instance">
+            <summary>
+            This class represents a solar panel or a generator instance
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.solwin.Instance.#ctor(System.Int32,System.Int32,System.Int32,System.DateTime)">
+            <summary>
+            Constructor for instance class
+            </summary>
+            <param name="id">Instance ID</param>
+            <param name="idSW">Instance type ID</param>
+            <param name="power">Instance power value</param>
+            <param name="timeChanged">Power change date</param>
+        </member>
+        <member name="P:powerdistributionsystem.solwin.Instance.ID">
+            <summary>
+            Instance ID
+            </summary>
+        </member>
+        <member name="P:powerdistributionsystem.solwin.Instance.IDSW">
+            <summary>
+            Instance type ID
+            </summary>
+        </member>
+        <member name="P:powerdistributionsystem.solwin.Instance.Power">
+            <summary>
+            Instance power value
+            </summary>
+        </member>
+        <member name="P:powerdistributionsystem.solwin.Instance.TimeChanged">
+            <summary>
+            Power changed date
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.solwin.Instance.Equals(System.Object)">
+            <summary>
+            Instance equals method
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:powerdistributionsystem.solwin.Instance.GetHashCode">
+            <summary>
+            Instance GetHashCode method
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:powerdistributionsystem.solwin.Instance.ToString">
+            <summary>
+            ToString method for Instance class
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:powerdistributionsystem.solwin.Solwin">
+            <summary>
+            This class performs panel/generator methods
+            </summary>
+        </member>
+        <member name="F:powerdistributionsystem.solwin.Solwin.instances">
+            <summary>
+            Instances list
+            </summary>
+        </member>
+        <member name="F:powerdistributionsystem.solwin.Solwin.random">
+            <summary>
+            Random value object
+            </summary>
+        </member>
+        <member name="F:powerdistributionsystem.solwin.Solwin.timestamp">
+            <summary>
+            Date time object
+            </summary>
+        </member>
+        <member name="F:powerdistributionsystem.solwin.Solwin.file">
+            <summary>
+            Instance list file directory
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.solwin.Solwin.#ctor">
+            <summary>
+            Empty constructor class
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.solwin.Solwin.readFromFile">
+            <summary>
+            Reads instances from file and adds them to the instance list
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.solwin.Solwin.writeToFile(System.Int32,System.Int32,System.Int32,System.Nullable{System.DateTime})">
+            <summary>
+            Writes instance to file
+            </summary>
+            <param name="id">Instance ID</param>
+            <param name="choice">Power generation method ID</param>
+            <param name="power">Power generated</param>
+            <param name="timeChanged">Changed power date</param>
+        </member>
+        <member name="M:powerdistributionsystem.solwin.Solwin.addInstance(System.Int32,System.Int32,System.Nullable{System.DateTime})">
+            <summary>
+            Adds instance and writes to file
+            </summary>
+            <param name="c">Power generation method ID</param>
+            <param name="cP">Power generated</param>
+            <param name="timeChanged">Changed power date</param>
+        </member>
+        <member name="M:powerdistributionsystem.solwin.Solwin.eraseInstance(System.Int32)">
+            <summary>
+            Erases instance from list and instance file
+            </summary>
+            <param name="eraseId">Instance ID</param>
+        </member>
+        <member name="M:powerdistributionsystem.solwin.Solwin.viewList">
+            <summary>
+            Presents a table of instances
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.solwin.Solwin.existsById(System.Int32)">
+            <summary>
+            Method for determining whether an instance exists inside the list
+            </summary>
+            <param name="id">Instance ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:powerdistributionsystem.solwin.Solwin.change(System.Int32,System.Int32)">
+            <summary>
+            Changes power generation of an instance
+            </summary>
+            <param name="id">Instance ID</param>
+            <param name="power">New power generation value</param>
+        </member>
+        <member name="M:powerdistributionsystem.solwin.Solwin.Equals(System.Object)">
+            <summary>
+            Equals method for Solwin class
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:powerdistributionsystem.solwin.Solwin.GetHashCode">
+            <summary>
+            GetHashCode method for Solwin class
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:powerdistributionsystem.solwin.Solwin.ToString">
+            <summary>
+            ToString method for Solwin lcass
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:powerdistributionsystem.UiOptions.MainUI">
+            <summary>
+            Calls main UI
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.UiOptions.ConsumerUI">
+            <summary>
+            Calls consumer UI
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.UiOptions.SelectUI">
+            <summary>
+            Calls select power socket UI
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.UiOptions.AddUI">
+            <summary>
+            Calls add socket UI
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.UiOptions.EraseUI">
+            <summary>
+            Calls erase socket UI
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.UiOptions.ViewSockets">
+            <summary>
+            Calls view socket UI
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.UiOptions.DistributionCenterUI">
+            <summary>
+            Calls distribution center UI
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.UiOptions.PowerCalc">
+            <summary>
+            Calls power calculator UI
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.UiOptions.SolarWindUI">
+            <summary>
+            Calls solar/wind instance UI
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.UiOptions.AddEraseSolWinUI">
+            <summary>
+            Calls add/erase panel/gen UI
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.UiOptions.ViewPanelGen">
+            <summary>
+            Calls view panel/gen UI
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.UiOptions.ChangeSunWind">
+            <summary>
+            Calls change panel/gen power UI
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.UiOptions.PowerPlantUI">
+            <summary>
+            Calls power plant UI
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.UiOptions.PPStatusEG">
+            <summary>
+            Calls power plant status UI
+            </summary>
+        </member>
+        <member name="M:powerdistributionsystem.UiOptions.PPLog">
+            <summary>
+            Reads power plant log
+            </summary>
+        </member>
+    </members>
+</doc>
