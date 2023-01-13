@@ -1,2 +1,2 @@
-1	|	Sporet	|	55
+1|Sporet|55
 

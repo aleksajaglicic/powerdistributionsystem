@@ -1,10 +1,10 @@
-using main.solwin;
+using powerdistributionsystem.solwin;
 using System.IO;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 
-namespace main.UnitTests
+namespace powerdistributionsystem.UnitTests
 {
     public class SolwinTests
     {

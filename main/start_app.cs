@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace main
+namespace powerdistributionsystem
 {
     class start_app
     {

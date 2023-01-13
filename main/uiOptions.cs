@@ -4,16 +4,18 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using ConsoleTables;
-using main.consumer;
+using powerdistributionsystem.consumer;
 
-namespace main
+namespace powerdistributionsystem
 {
     class UiOptions
     {
         private int uiNum;
-        public solwin.Solwin sw = new solwin.Solwin();
         private int counter = 0;
         public System.Random random = new System.Random();
+        public solwin.Solwin sw = new solwin.Solwin();
+        public powerplant.Plant plant = new powerplant.Plant();
+        public distributioncenter.Center center = new distributioncenter.Center();
         LogicFunctions listH = new LogicFunctions();
         LogicFunctions list = new LogicFunctions();
 
@@ -30,16 +32,16 @@ namespace main
 
         public UiOptions() { }
 
+        /// <summary>
+        /// Calls main UI
+        /// </summary>
         public void MainUI()
         {
-
-            plant p = new plant();
-
             //var startTimeSpan = TimeSpan.Zero;
             //var periodTimeSpan = TimeSpan.FromMinutes(5);
             //var timer = new System.Threading.Timer((e) =>
             //{
-            //   ChangeSunWind();
+            //    ChangeSunWind();
             //}, null, 5000, 30000);
 
             Console.BackgroundColor = ConsoleColor.White;
@@ -101,6 +103,9 @@ namespace main
             }
         }
 
+        /// <summary>
+        /// Calls consumer UI
+        /// </summary>
         public void ConsumerUI()
         {
             Console.BackgroundColor = ConsoleColor.White;
@@ -164,14 +169,17 @@ namespace main
             }
         }
 
+        /// <summary>
+        /// Calls select power socket UI
+        /// </summary>
         public void SelectUI()
         {
             if (counter < 1)
             {
                 listH.ReadFromFile("./files/LoadInstances.txt");
             }
-            var table = new ConsoleTable("Id:", "Name: ", "Power:");
 
+            var table = new ConsoleTable("Id:", "Name: ", "Power:");
             ConsoleTable.From<Consumer>(listH.archive.ToList()).Write();
 
             if (listH.archive.Count == 0)
@@ -194,6 +202,9 @@ namespace main
 
         }
 
+        /// <summary>
+        /// Calls add socket UI
+        /// </summary>
         public void AddUI()
         {
             Console.WriteLine("Enter socket id:");
@@ -219,6 +230,9 @@ namespace main
 
         }
 
+        /// <summary>
+        /// Calls erase socket UI
+        /// </summary>
         public void EraseUI()
         {
             Console.WriteLine("Enter id of socket to erase:");
@@ -232,22 +246,28 @@ namespace main
             ConsumerUI();
         }
 
+        /// <summary>
+        /// Calls view socket UI
+        /// </summary>
         public void ViewSockets()
         {
-            if(list.archive.Count == 0)
+            if (list.archive.Count == 0)
             {
                 Console.WriteLine("No Instances turned on...");
             }
             else
-            { 
+            {
                 var table = new ConsoleTable("Id:", "Name: ", "Power:");
                 ConsoleTable.From<Consumer>(list.archive.ToList()).Write();
             }
-            
+
             Console.WriteLine();
             ConsumerUI();
         }
 
+        /// <summary>
+        /// Calls distribution center UI
+        /// </summary>
         public void DistributionCenterUI()
         {
             Console.BackgroundColor = ConsoleColor.White;
@@ -261,8 +281,7 @@ namespace main
 
             Console.WriteLine("\nPlease select one of the following:");
             Console.WriteLine("\\\\\\\\ 1.Power Generation Calculator");
-            Console.WriteLine("\\\\\\\\ 2.View Power Plant request state");
-            Console.WriteLine("\\\\\\\\ 3.Return to main menu\n");
+            Console.WriteLine("\\\\\\\\ 2.Return to main menu\n");
 
             Console.WriteLine("Go to option: ");
             UINum = Int32.Parse(Console.ReadLine());
@@ -272,13 +291,9 @@ namespace main
             {
                 Console.Clear();
                 PowerCalc();
+                DistributionCenterUI();
             }
             else if (UINum == 2)
-            {
-                Console.Clear();
-                PlantState();
-            }
-            else if (UINum == 3)
             {
                 Console.Clear();
                 MainUI();
@@ -298,16 +313,55 @@ namespace main
             }
         }
 
+        /// <summary>
+        /// Calls power calculator UI
+        /// </summary>
         public void PowerCalc()
         {
+            Console.Clear();
+
             //To be added
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+
+            //Calculator UI
+            Console.WriteLine("Power Calculator");
+
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+
+            int pC = center.powerCalculator();
+            int sP = center.socketPowerUsage();
+
+            if ((pC - sP) < 0)
+            {
+                if (plant.turnOnPlant(pC, sP) == 1)
+                {
+                    plant.Save(plant, "./files/PlantData.txt");
+                }
+
+                Console.WriteLine("Need additional power... Current Socket Power Usage: " + sP + "% SolarWind Power Generation " + pC + "%");
+                Console.WriteLine("Turning on power plant...");
+
+                if ((sP - pC) >= 100)
+                {
+                    plant.Save(plant, "./files/PlantData.txt");
+                    Console.WriteLine("Cannot turn on Power Plant... Power Usage exceeds Power Plant generation...");
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("Power Usage fullfiled... Current Socket Power Usage: " + sP + "% SolarWind Power Generation " + pC + "%");
+                plant.Status = false;
+                plant.Output = 0;
+                plant.Save(plant, "./files/PlantData.txt");
+            }
         }
 
-        public void PlantState()
-        {
-            //To be added
-        }
-
+        /// <summary>
+        /// Calls solar/wind instance UI
+        /// </summary>
         public void SolarWindUI()
         {
             Console.BackgroundColor = ConsoleColor.White;
@@ -364,6 +418,9 @@ namespace main
             }
         }
 
+        /// <summary>
+        /// Calls add/erase panel/gen UI
+        /// </summary>
         public void AddEraseSolWinUI()
         {
             Console.BackgroundColor = ConsoleColor.White;
@@ -469,6 +526,9 @@ namespace main
             }
         }
 
+        /// <summary>
+        /// Calls view panel/gen UI
+        /// </summary>
         public void ViewPanelGen()
         {
             sw.viewList();
@@ -482,6 +542,9 @@ namespace main
             }
         }
 
+        /// <summary>
+        /// Calls change panel/gen power UI
+        /// </summary>
         public void ChangeSunWind()
         {
             sw.viewList();
@@ -524,14 +587,14 @@ namespace main
                 Console.Clear();
                 SolarWindUI();
             }
-            else if(uiNum == 1)
+            else if (uiNum == 1)
             {
                 Console.Clear();
                 sw.viewList();
                 Console.WriteLine("Return to previous menu? (1 for yes)");
                 UINum = Int32.Parse(Console.ReadLine());
 
-                if(uiNum == 1)
+                if (uiNum == 1)
                 {
                     Console.Clear();
                     SolarWindUI();
@@ -551,7 +614,10 @@ namespace main
             }
         }
 
-        public void PowerPlantUI(plant p)
+        /// <summary>
+        /// Calls power plant UI
+        /// </summary>
+        public void PowerPlantUI()
         {
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
@@ -574,12 +640,12 @@ namespace main
             if (UINum == 1)
             {
                 Console.Clear();
-                PPStatusEG(p);
+                PPStatusEG();
             }
             else if (UINum == 2)
             {
                 Console.Clear();
-                PPLog(p);
+                PPLog();
             }
             else if (UINum == 3)
             {
@@ -601,36 +667,55 @@ namespace main
             }
         }
 
-        public void PPStatusEG(plant p)
+        /// <summary>
+        /// Calls power plant status UI
+        /// </summary>
+        public void PPStatusEG()
         {
 
             Console.Clear();
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.White;
-            if (p.Status)
+            if (plant.Status)
             {
-                Console.WriteLine("\n\nCurrent state of Power Plant: ON\t Generated: {0}%\n\n",p.Output);
+                Console.Write("\n\nCurrent state of Power Plant: ");
+                Console.BackgroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.Write("ON\t");
+
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.Write("Generated: {0}%\n\n", plant.Output);
             }
             else
             {
-                Console.WriteLine("\n\nCurrent state of Power Plant: OFF\t Generated: {0}%\n\n", p.Output);
+                Console.Write("\n\nCurrent state of Power Plant: ");
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.Write("OFF\t");
+
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.Write("Generated: {0}%\n\n", plant.Output);
+
             }
 
-            PowerPlantUI(p);
-
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.White;
-
+            PowerPlantUI();
         }
 
-        public void PPLog(plant p)
+        /// <summary>
+        /// Reads power plant log
+        /// </summary>
+        public void PPLog()
         {
             Console.Clear();
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
 
-            p.read();
-            PowerPlantUI(p);
+            plant.read("./files/PlantData.txt");
+            PowerPlantUI();
 
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;

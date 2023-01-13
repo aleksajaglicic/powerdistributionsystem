@@ -2,9 +2,9 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using main.consumer;
+using powerdistributionsystem.consumer;
 
-namespace main.UnitTests
+namespace powerdistributionsystem.UnitTests
 {
     public class ConsumerTests
     {
@@ -46,6 +46,7 @@ namespace main.UnitTests
             var consumer1 = new Consumer(1, "Sporet", 55);
             var logfun = new LogicFunctions();
             logfun.archive.Add(consumer1);
+            
             //Act
             Consumer c=logfun.Find(1);
 
@@ -62,8 +63,10 @@ namespace main.UnitTests
             List<Consumer> list = new List<Consumer>();
             list.Add(consumer1);
             string file = Environment.CurrentDirectory + "/TestFile/Consumer_Test.txt";
+            
             //Act
             logfun.ReadFromFile(file);
+            
             //Assert
             Assert.AreEqual(list.ToString(), logfun.archive.ToString());
         }
